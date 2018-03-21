@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable
 open class TagView: UIButton {
-
+    
     @IBInspectable open var cornerRadius: CGFloat = 0 {
         didSet {
             layer.cornerRadius = cornerRadius
@@ -51,7 +51,7 @@ open class TagView: UIButton {
             updateRightInsets()
         }
     }
-
+    
     @IBInspectable open var tagBackgroundColor: UIColor = UIColor.gray {
         didSet {
             reloadStyles()
@@ -171,14 +171,14 @@ open class TagView: UIButton {
         self.addGestureRecognizer(longPress)
     }
     
-    func longPress() {
+    @objc func longPress() {
         onLongPress?(self)
     }
     
     // MARK: - layout
-
+    
     override open var intrinsicContentSize: CGSize {
-        var size = titleLabel?.text?.size(attributes: [NSFontAttributeName: textFont]) ?? CGSize.zero
+        var size = titleLabel?.text?.size(withAttributes: [NSAttributedStringKey.font: textFont]) ?? CGSize.zero
         size.height = textFont.pointSize + paddingY * 2
         size.width += paddingX * 2
         if size.width < size.height {

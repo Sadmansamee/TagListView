@@ -182,7 +182,7 @@ open class TagListView: UIView {
     
     @IBInspectable open dynamic var enableMutipleSelection: Bool = false
     
-    open dynamic var textFont: UIFont = UIFont.systemFont(ofSize: 12) {
+    @objc open dynamic var textFont: UIFont = UIFont.systemFont(ofSize: 12) {
         didSet {
             for tagView in tagViews {
                 tagView.textFont = textFont
@@ -320,7 +320,7 @@ open class TagListView: UIView {
         
         return tagView
     }
-
+    
     @discardableResult
     open func addTag(_ title: String) -> TagView {
         return addTagView(createNewTagView(title))
@@ -344,7 +344,7 @@ open class TagListView: UIView {
         rearrangeViews()
         return tagViews
     }
-
+    
     @discardableResult
     open func insertTag(_ title: String, at index: Int) -> TagView {
         return insertTagView(createNewTagView(title), at: index)
@@ -358,7 +358,7 @@ open class TagListView: UIView {
         
         return tagView
     }
-
+    
     @discardableResult
     open func insertTagView(_ tagView: TagView, at index: Int) -> TagView {
         tagViews.insert(tagView, at: index)
@@ -411,19 +411,19 @@ open class TagListView: UIView {
         tagBackgroundViews = []
         rearrangeViews()
     }
-
+    
     open func selectedTags() -> [TagView] {
         return tagViews.filter() { $0.isSelected == true }
     }
     
     // MARK: - Events
     
-    func tagPressed(_ sender: TagView!) {
+     @objc func tagPressed(_ sender: TagView!) {
         sender.onTap?(sender)
         delegate?.tagPressed?(sender.currentTitle ?? "", tagView: sender, sender: self)
     }
     
-    func removeButtonPressed(_ closeButton: CloseButton!) {
+    @objc func removeButtonPressed(_ closeButton: CloseButton!) {
         if let tagView = closeButton.tagView {
             delegate?.tagRemoveButtonPressed?(tagView.currentTitle ?? "", tagView: tagView, sender: self)
         }
